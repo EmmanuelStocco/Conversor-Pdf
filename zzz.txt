@@ -1,0 +1,72 @@
+
+var conteudo
+
+fs.readFile("./txt", {encoding: 'utf-8'}, (error, dados)=>{ //padrão essa func tem parametro error e dados e mais o formato q a func deve ler
+
+    if(error){
+        console.log("Ocorreu uma falha durante a leitura do arquivo")
+    }else{
+        console.log(dados)
+    }
+})
+
+const fs = require("fs") //file system 
+
+//add conteudo no arqvs
+fs.writeFile("./txt", "Novo conteudo do arquivo", (err)=>{ //arqv, novo conteudo e callback para erro
+
+    if(err){
+        console.log("erro ao salvar")
+    }
+})
+
+
+//sobrescreve conteudo no arqvs
+fs.readFile("./usuario.json", {encoding: "utf-8"}, (erro, dados)=>{
+    if(erro){
+        console.log("Um erro aconteceu")
+    }else{
+        var conteudo = JSON.parse(dados) //texto para obj js
+
+        conteudo.nome = "Emmanuel Rolim Stocco";
+        conteudo.curso = "Formação React"
+        conteudo.categoria = "React" 
+
+        fs.writeFile("./usuario.json", JSON.stringify(conteudo), (erro)=>{//obj JS para texto
+                if(erro){
+                    console.log("Um erro aconteceu durante a escrita!")
+                }
+        }) 
+
+        console.log(conteudo)
+    }
+})
+
+const fs = require("fs") //file system 
+
+function modificarUsuario(nome, curso, categoria){     
+    fs.readFile("./usuario.json", {encoding: "utf-8"}, (erro, dados)=>{
+        if(erro){
+            console.log("Um erro aconteceu")
+        }else{
+            var conteudo = JSON.parse(dados) //texto para obj js
+
+            conteudo.nome = nome
+            conteudo.curso = curso
+            conteudo.categoria = categoria
+
+            fs.writeFile("./usuario.json", JSON.stringify(conteudo), (erro)=>{//obj JS para texto
+                    if(erro){
+                        console.log("Um erro aconteceu durante a escrita!")
+                    }
+            }) 
+
+            console.log(conteudo)
+        }
+    })
+}
+
+modificarUsuario("Emmanuel", "NODE.JS MARATONA", "NODE>JS")
+
+
+get transforma o metodo em um atributo sendo necessario retornar algo
